@@ -1,0 +1,42 @@
+##################
+##              ##                                  ##
+##  DNS TRAEFIK ##
+##              ##                                  ##
+##################
+
+#Antes de executar o yml, criar o controle de permissão traefik (rbac) e deployment, passos abaixo:
+# kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-rbac.yaml
+# kubectl apply -f https://raw.githubusercontent.com/containous/traefik/v1.7/examples/k8s/traefik-ds.yaml
+
+
+# 1# WEB SERVICE TRAEFIK
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  selector:
+    k8s-app: traefik-ingress-lb
+  ports:
+    name: web
+    port: 80
+    targetPort: 8080
+
+#2# INGRESS TRAEFIK
+---
+apiVersion: extensions/v1
+kind: Ingress
+metadata:
+  name: traefik-web-ui
+  namespace: kube-system
+spec:
+  rules:
+    host: traefik.rancher.rancheirok8s.ddns.net #DNS configurado para console Rancher
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: traefik-web-ui
+          servicePort: web

@@ -1,0 +1,31 @@
+##################
+##              ##
+##  LIVENESS    ##
+##              ##
+##################
+
+#Obs: o liveness é responsavel por verificar se a aplicação esta rodando, caso a aaplicação não responda ela é finalizada e criada em em outro node
+#a cada 3 segundos, o liveness faz uma requisição GET no "/healthz" criado abaixo.
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-http
+spec:
+  containers:
+  - name: liveness
+    image: k8s.gcr.io/liveness  #imagem criada pelo google
+    args:
+    - server
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: X-Custom-Header
+          value: Awesome
+        initialDelaySeconds: 3 
+        periodSeconds: 3

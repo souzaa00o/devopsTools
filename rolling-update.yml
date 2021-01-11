@@ -1,0 +1,28 @@
+########################
+##                    ##
+##  Rolling-update    ##
+##                    ##
+########################
+
+# O Rolling-update tem a função de fazer o deploy de atualizações em produção, como o exemplo abaixo, dar update nas imagens do nginx em serviço
+
+---
+apiVersion: apps/v1
+kind: Deplyment
+metadata:
+  name: my-nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+    replicas: 5   #5 replicas da imagem do nginx
+    template:
+      metadata:
+        labels:
+          app: nginx
+      spec:
+        containers:
+        - name: nginx
+          image: nginx:1.19.0
+          ports:
+          - containerPort: 80

@@ -1,0 +1,33 @@
+##################
+##              ##
+##  CONFIGMAP   ##
+##              ##
+##################
+# obs: O configmap tem a função de alterar dados externos ao container sem necessidade de rebuild, como por exemplo, inserir novos IPs do load balancer 
+
+
+# 1# criação do mapa de config com duas variaveis <SPECIAL_LEVEL> e <SPECIAL TYPE>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: special-config
+data:
+  SPECIAL_LEVEL: very
+  SPECIAL_TYPE: charm
+
+# 2# Pod com a imagem busybox (shell leve) para executar < command: [ "/bin/sh", "-c", "env" ] > e printar as variaveis de ambiente do configmap, linkado por < configMapRef: name: special-config >
+---
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: config-test-pod
+spec:
+  containers:
+    name: test-container
+    image: k8s.gcr.io/busybox
+    command: [ "/bin/sh", "-c", "env" ]
+    envFrom:
+      configMapRef:
+        name: special-config
+  restartPolicy: Never
