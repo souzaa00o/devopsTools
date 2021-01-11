@@ -1,0 +1,50 @@
+##################
+##              ##
+##  PHP-APACHE  ##
+##              ##
+##################
+
+#Obs: Serviço criado para aumentar a carga da cpu, para evidenciar o auto escalonamento no arquivo "hpa.yml"
+
+### LINK >>> https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/#before-you-begin
+
+# 1 Deploy imagem php-apache
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-apache
+spec:
+  selector:
+    matchLabels:
+      run: php-apache
+    replicas: 1
+    template:
+      metadata:
+        labels:
+          run: php-apache
+      spec:
+        containers:
+        - name: php-apache
+          image: k8s.gcr.io/hpa-example  #imagem de stress em php LINK ACIMA.
+          ports:
+          - containerPort: 80
+          resources:
+            limits:       # aqui limitamos o consumo de cpu da aplicação,
+              cpu: 500m   
+            request:
+              cpu: 200m
+
+# 2 service para responder para o php
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-apache
+  labels:
+    run: php-apache
+spec:
+  ports: 
+    port: 80
+  selector:
+    run: php-apache

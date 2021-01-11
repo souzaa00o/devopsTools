@@ -1,0 +1,27 @@
+######################
+##                  ##
+##  NODE-SELECTOR   ##
+##                  ##
+######################
+
+# Obs: o node-selector permite fazer deploy, criar pod entre outras
+#funções, apenas em nodes especificos, nodes tageados
+
+# How2: $ kubectl label nodes <your-node-name> disktype=ssd
+
+# O pod abaixo so ira rodar nos nodes com o disktype de tag ssd
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels: 
+    env: test
+spec:
+  containers: 
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    disktype: ssd
