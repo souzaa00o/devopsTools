@@ -3,8 +3,6 @@
 <h2> Ferramentas </h2>
 <h3>Rancher, K8s, Docker, AWS, Traefik DNS...</h3>
 <br>
-<h4> Em andamento </h4>
-
 
 <h3> Esse repositorio armazena arquivos de configurações devops para desenvolvimento continuo, com a finalidade de orquestrar clusters K8s através do Rancher, o ambiente foi criado em cloud na AWS.</h3>
 
@@ -28,4 +26,14 @@
 <h4>hpa.yml = cria um serviço de auto-escalonamento para o serviço php-apache.yml</h4>
 <br>
 <h4>node-selector.yml = adicionamos a função node selector no pod, assim ele so pode rodar em pods com a tag definida no "node-selector.yml"</h4>
-<h4>...</h4>
+<br>
+<h4>pipeline-rancher-k8s/Dockerfile = Arquivo de build do docker</h4>
+<br>
+<h4>.rancher-pipeline.yml = Pipeline Jenkins-Rancher configurado</h4>
+<br>
+<h4>deployment.yml = Função de deploy chamada por ".rancher-pipeline.yml" para terminar o pipeline</h4>
+<br>
+<h4>main.go = Aplicação API go</h4>
+<br>
+<h4></h4>
+<h5>Em andamento</h5>
