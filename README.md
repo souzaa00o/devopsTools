@@ -29,11 +29,12 @@
 <br>
 <h4>pipeline-rancher-k8s/Dockerfile = Arquivo de build do docker</h4>
 <br>
-<h4>.rancher-pipeline.yml = Pipeline Jenkins-Rancher configurado</h4>
+<h4>pipeline-rancher-k8s/.rancher-pipeline.yml = Pipeline Jenkins-Rancher configurado</h4>
 <br>
-<h4>deployment.yml = Função de deploy chamada por ".rancher-pipeline.yml" para terminar o pipeline</h4>
+<h4>pipeline-rancher-k8s/deployment.yml = Função de deploy chamada por ".rancher-pipeline.yml" para terminar o pipeline</h4>
 <br>
-<h4>main.go = Aplicação API go</h4>
+<h4>pipeline-rancher-k8s/main.go = Aplicação API go</h4>
 <br>
+<h4>function-nodejs.yml = yaml para executar funções kubeless, função python criada.</h4>
 <h4></h4>
 <h5>Em andamento</h5>
