@@ -1,0 +1,18 @@
+# criação de pod para testar o "cpu-constaints.yml"
+# pod com parametros de cpu OK
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: constraints-cpu-demo
+  namespace: constraints-cpu-example
+spec:
+  containers:
+  - name: contraints-cpu-demo-ctr
+    image: nginx
+    resources:
+      limits:
+        cpu: "800m"
+      requests:
+        cpu: "500m"

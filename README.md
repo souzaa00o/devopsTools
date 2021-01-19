@@ -36,5 +36,13 @@
 <h4>pipeline-rancher-k8s/main.go = Aplicação API go</h4>
 <br>
 <h4>function-nodejs.yml = yaml para executar funções kubeless, função python criada.</h4>
+<br>
+<h4>network-policy.yml = yml para politica de rede, define comunicação dos pods </h4>
+<br>
+<h4>cpu-contraints.yml = yml para definir parametros de uso de cpu por namespace</h4>
+<br>
+<h4>cpu-contraints-pod.yml = deploy de pod para teste dos parametros de cpu "cpu-contraints.yml", parametros de CPU OK</h4>
+<br>
+<h4>cpu-contraints-pod-2.yml = deploy de pod para teste dos parametros de cpu "cpu-contraints.yml", parametros de CPU NOT OK</h4>
 <h4></h4>
 <h5>Em andamento</h5>

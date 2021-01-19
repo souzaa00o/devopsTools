@@ -1,0 +1,22 @@
+##########################
+##                      ##
+##  CPU-CONSTAINTS.YML  ##
+##                      ##
+##########################
+
+# Obs: yml para limitar o consumo de CPU dos containers no namespace "constraints-cpu-example"
+# caso o pod nao tenha seus limites definidos o cpu-constaints.yml define seu padrão
+# caso os parametros do pod esteja fora dos parametros definidos no cpu-constraints.yml, o pod não é criado
+---
+apiVersion: v1
+kind: LimitRange  #atento ao kind
+metadata:
+  name: cpu-min-max-demo-lr
+  namespace: constraints-cpu-example
+spec:
+  limits:
+  - max:
+      cpu: "800m"
+    min:  
+      cpu: "200m"
+    type: Container

@@ -1,0 +1,25 @@
+########################
+##                    ##
+##  NGINX.POLICY.YML  ##
+##                    ##
+########################
+
+# Obs: define a politica de rede, permitindo a comunicação de pods especificos
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy   #atento ao kind
+metadata:
+  name: access-nginx
+spec:
+  podSelector: 
+    matchLabels:    #procura o match de labels
+      app: nginx  #label para match
+    ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            access: "true"  #sera permetido o trafego externo apenas dos pods com o --labels="access=true"
+
+
+## Para testar a comunicação, de um ping no container do nginx:
+      ## wget --spider --timeout=1 nginx
